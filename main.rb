@@ -3,6 +3,7 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'json'
 require 'net/http'
+require 'open-uri'
 
 # sinatra configuration
 set :show_exceptions, :after_handler
@@ -25,6 +26,10 @@ error do
   body ({ error: 'Sorry there was a nasty error - ' + env['sinatra.error'].message }.to_json)
 end
 
+get '/' do
+  remote_ip = open('http://ipecho.net/plain').read
+  body ({ public_ip: remote_ip, client_ip: request.ip, date: Time.now(), puma_config: env['puma.config'].options }.to_json)
+end
 
 # API endpoints
 IP_EP = 'http://ip-api.com/json'
@@ -33,41 +38,41 @@ WEATHER_EP = 'http://api.openweathermap.org/data/2.5'
 
 
 # start coding below
-get "/ip" do
-  body ({ errors: [{ message: 'not yet implemented'}]}.to_json)
+get '/ip' do
+  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
 end
 
 
 get '/locations' do
-  body ({ errors: [{ message: 'not yet implemented'}]}.to_json)
+  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
 end
 
 
 get '/connections' do
-  body ({ errors: [{ message: 'not yet implemented'}]}.to_json)
+  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
 end
 
 
 get '/stationboard' do
-  body ({ errors: [{ message: 'not yet implemented'}]}.to_json)
+  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
 end
 
 
 get '/weather' do
-  body ({ errors: [{ message: 'not yet implemented'}]}.to_json)
+  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
 end
 
 
 get '/stations' do
-  body ({ errors: [{ message: 'not yet implemented'}]}.to_json)
+  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
 end
 
 
 get '/weathers' do
-  body ({ errors: [{ message: 'not yet implemented'}]}.to_json)
+  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
 end
 
 
 get '/future_weathers' do
-  body ({ errors: [{ message: 'not yet implemented'}]}.to_json)
+  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
 end
