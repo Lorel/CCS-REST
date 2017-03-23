@@ -1,8 +1,8 @@
 # CCS-REST
+Team Members: *Guillaume Corsini & Stefan Borer*
+
 Teaching project for purpose of practical works.
-
 The aim here is to manipulate several REST APIs to feed an other one.
-
 All the datas are formatted in JSON.
 
 ## Used APIs
