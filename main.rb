@@ -50,7 +50,13 @@ end
 
 
 get '/locations' do
-  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
+  location = params['location'] || 'Neuchatel'
+  url = TRANSPORT_EP + '/locations?' + 'query=' + location
+  uri = URI(url)
+  response = Net::HTTP.get_response(uri)
+  result = JSON.parse(response.body)
+
+  body result.to_json
 end
 
 
