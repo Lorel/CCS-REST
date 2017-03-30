@@ -39,22 +39,48 @@ WEATHER_EP = 'http://api.openweathermap.org/data/2.5'
 
 # start coding below
 get '/ip' do
-  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
+  ip = params['ip'] || '130.125.1.11'
+  url = IP_EP + '/' + ip
+  uri = URI(url)
+  response = Net::HTTP.get_response(uri)
+  result = JSON.parse(response.body)
+
+  body result.to_json
 end
 
 
 get '/locations' do
-  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
+  location = params['location'] || 'Neuchatel'
+  url = TRANSPORT_EP + '/locations?' + 'query=' + location
+  uri = URI(url)
+  response = Net::HTTP.get_response(uri)
+  result = JSON.parse(response.body)
+
+  body result.to_json
 end
 
 
 get '/connections' do
-  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
+  from = params['from'] || 'Neuchatel'
+  to = params['to'] || 'Bern'
+  url = TRANSPORT_EP + '/connections?' + 'from=' + from + '&to=' + to
+  uri = URI(url)
+  response = Net::HTTP.get_response(uri)
+  result = JSON.parse(response.body)
+
+  body result.to_json
 end
 
 
 get '/stationboard' do
-  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
+  station = params['station'] || 'Neuchatel'
+  limit = params['limit'] || '10'
+  url = TRANSPORT_EP + '/stationboard?' + 'station=' + station + '&limit=' + limit
+  uri = URI(url)
+  response = Net::HTTP.get_response(uri)
+  result = JSON.parse(response.body)
+
+  body result.to_json
 end
 
 
