@@ -61,7 +61,14 @@ end
 
 
 get '/connections' do
-  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
+  from = params['from'] || 'Neuchatel'
+  to = params['to'] || 'Bern'
+  url = TRANSPORT_EP + '/connections?' + 'from=' + from + '&to=' + to
+  uri = URI(url)
+  response = Net::HTTP.get_response(uri)
+  result = JSON.parse(response.body)
+
+  body result.to_json
 end
 
 
