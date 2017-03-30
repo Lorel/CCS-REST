@@ -73,7 +73,14 @@ end
 
 
 get '/stationboard' do
-  body ({ errors: [{ message: 'not yet implemented' }]}.to_json)
+  station = params['station'] || 'Neuchatel'
+  limit = params['limit'] || '10'
+  url = TRANSPORT_EP + '/stationboard?' + 'station=' + station + '&limit=' + limit
+  uri = URI(url)
+  response = Net::HTTP.get_response(uri)
+  result = JSON.parse(response.body)
+
+  body result.to_json
 end
 
 
